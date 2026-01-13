@@ -1,3 +1,5 @@
+// 
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,181 +11,202 @@ class Febtablepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 900 ? 900.0 : screenWidth * 0.95;
+
     return Scaffold(
-      body:SingleChildScrollView(
-        child: Column(spacing: 20,
+      body: SafeArea(
+        child: Column(
           children: [
-            Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-              child:Padding(
-              padding: const EdgeInsets.only(right: 100),
-              child: Row(spacing: 30,
-                children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-                
-                Padding(
-                  padding: const EdgeInsets.only(right: .0),
-                  child: Text("STUCOR - TimeTabe",style: TextStyle(color: Colors.white,fontSize: 20),),
-                ),
-        
-            
-                ] 
-                        ),
-                   )
-                  ),
-        
-                  Container(height: 550,
-                  width: 450,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),
-                  border: Border.all(color: Colors.black)),
-                   child: Column(
+            /// HEADER
+            Container(
+              height: 70,
+              width: double.infinity,
+              color: const Color.fromARGB(255, 11, 49, 174),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
                 children: [
-                   Padding(
-                            padding: const EdgeInsets.only(right: 150.0,top: 10,left: 10,bottom: 10),
-                            child: Text("Apr/may 2025 semester timetabe-AU Affiliated clg",style: TextStyle(fontSize: 20,color: const Color.fromARGB(255, 9, 19, 135)),),
-                          ),
-                    
-                          Padding(
-                            padding: const EdgeInsets.only(right: 235.0),
-                            child: Text(" published 11 days ago | jul 25 - 02:42 pm ",style: TextStyle(fontSize: 10,color: Colors.grey),),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 280.0),
-                            child: Text("_________________"),
-                          ),
-                         
-                        
-                        
-                          Container(
-                          
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [RichText(text: TextSpan(children:[TextSpan(text:" Anna University exam timetable or conversations and completing  kindly download  timetable provide below and prepare for the examinaation accordingly- .",style: TextStyle(fontSize: 20),),
-                            
-                              TextSpan(text: "click here",style: TextStyle(color: Colors.blue),
-                              recognizer: TapGestureRecognizer()..onTap=(){
-                                Get.to(Browser());
-                            
-                              }),
-                              TextSpan(text: " to Share clasmates. ompleting Thank you .",style: TextStyle(fontSize: 20),)
-                            
-                            ]
-                             )),
-                                                         
-                            
-                                    
-                              ],
-                            ),
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "STUCOR - TimeTable",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenWidth < 400 ? 16 : 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            /// BODY
+            Expanded(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Container(
+                    width: contentWidth,
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// TITLE
+                        const Text(
+                          "Feb/Mar 2025 Semester Timetable - AU Distance Education",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 9, 19, 135),
                           ),
                         ),
-                        
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                        const SizedBox(height: 4),
+                        const Text(
+                          "Published 11 days ago | Jul 25 - 02:42 PM",
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        const Divider(),
+
+                        /// DESCRIPTION
+                        RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
                             children: [
-                              Column(children: [
-                                Container(height: 20,width: 100,decoration: BoxDecoration(shape: BoxShape.rectangle
-                                ,border: Border.all(color: Colors.black)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Text("PG DEGREE",style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),),
-                                ),),
-                                Container(height: 20,width: 100,decoration: BoxDecoration(shape: BoxShape.rectangle
-                                ,border: Border.all(color: Colors.black)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Text("All Department",style: TextStyle(color: Colors.black,fontSize: 10),),
-                                ),),
-                              
-                              
-                              
-                              
-                              
-                              ],),
-                               Column(children: [
-                            Container(height: 20,width: 100,decoration: BoxDecoration(shape: BoxShape.rectangle
-                            ,border: Border.all(color: Colors.black)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: Text("Department",style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),),
-                            ),),
-                                                     
-                            Container(height: 20,width: 100,decoration: BoxDecoration(shape: BoxShape.rectangle
-                            ,border: Border.all(color: Colors.black)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: Text("Downlaod",style: TextStyle(fontSize: 10,color: Colors.blue),),
-                            ),),
-                            
-                            
-                            
-                            
-                            
-                                                    ],)
-                                                   
-                                                    
+                              const TextSpan(
+                                text:
+                                    "Anna University exam timetable is available. Kindly download the timetable provided below and prepare accordingly. ",
+                              ),
+                              TextSpan(
+                                text: "Click here",
+                                style:
+                                    const TextStyle(color: Colors.blue),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Get.to(const Browser());
+                                  },
+                              ),
+                              const TextSpan(
+                                text:
+                                    " to share with classmates.",
+                              ),
                             ],
-                                                    ),
-                          ),
-                         Container(
-                          
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [RichText(text: TextSpan(children: [TextSpan(text:"Note:",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20), ),
-                              TextSpan(text: " Download links serve PDFs from Anna University Domians I.",style: TextStyle(fontSize: 20),),
-                               
-                              
-                              
-                             
-                            
-                              ])),
-                                    
-                              ],
-                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(spacing: 2,
-                            children: [
-                              Text("SOURCE:",style: TextStyle(fontWeight: FontWeight.bold),),
-                              InkWell(onTap: () {
-                                Get.to(Browser());
-                              },
-                                child: Text("coe1.annauniv.edu",style: TextStyle(color: Colors.blue),))
-                            ],
-                          ),
-                        )
-                         
-      
 
+                        const SizedBox(height: 20),
 
-                        ],)
-                        
-                       
-                        
+                        /// PG TABLE
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  _cell("PG DEGREE", bold: true),
+                                  _cell("All Departments"),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  _cell("DEPARTMENT", bold: true),
+                                  _cell("Download",
+                                      color: Colors.blue),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        /// NOTE
+                        const Text(
+                          "Note: Download links serve PDFs from Anna University domains.",
+                          style: TextStyle(fontSize: 16),
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        /// SOURCE
+                        Row(
+                          children: [
+                            const Text(
+                              "SOURCE: ",
+                              style:
+                                  TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            InkWell(
+                              onTap: () => Get.to(const Browser()),
+                              child: const Text(
+                                "coe1.annauniv.edu",
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            /// BOTTOM BAR
+            BottomNavigationBar(
+              backgroundColor:
+                  const Color.fromARGB(255, 33, 89, 243),
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () => Get.to(const Comment()),
+                    icon: const Icon(Icons.message, color: Colors.white),
+                  ),
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () => Get.to(const Browser()),
+                    icon: const Icon(Icons.share, color: Colors.white),
+                  ),
+                  label: "",
+                ),
+              ],
+            ),
+          ],
         ),
-          Padding(
-            padding: const EdgeInsets.only(top: 70.0),
-            child: BottomNavigationBar(type: BottomNavigationBarType.fixed,
-              backgroundColor: const Color.fromARGB(255, 33, 89, 243),
-                items:[BottomNavigationBarItem(icon: IconButton(onPressed: (){
-                  Get.to(Comment());
-                }, icon: Icon(Icons.message,color: Colors.white,),
-                 ), label:   ""  ),BottomNavigationBarItem(icon:IconButton(onPressed: (){
-                  Get.to(Browser());
-        
-                 }, icon:  Icon(Icons.share,color: Colors.white,)),label: ""
-              )
-              ]),
-          ),
-          
-          
-        
-        ]
-        ,
-                        ),
       ),
-      
-      );
+    );
+  }
+
+  /// TABLE CELL
+  Widget _cell(String text,
+      {bool bold = false, Color color = Colors.black}) {
+    return Container(
+      height: 28,
+      alignment: Alignment.center,
+      decoration:
+          BoxDecoration(border: Border.all(color: Colors.black)),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+          color: color,
+        ),
+      ),
+    );
   }
 }
