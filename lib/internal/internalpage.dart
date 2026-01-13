@@ -1,81 +1,109 @@
+// 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stucorclone/internal/assesspage.dart';
-import 'package:stucorclone/resultwidget/result.dart';
 
 class Internalpage extends StatelessWidget {
   const Internalpage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:Column(spacing: 20,
-        children: [
-          Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-            child:Padding(
-            padding: const EdgeInsets.only(right: 100),
-            child: Row(spacing: 30,
-              children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-              
-              Padding(
-                padding: const EdgeInsets.only(right: .0),
-                child: Text("STUCOR - Assess&Intern...",style: TextStyle(color: Colors.white,fontSize: 20),),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Max content width for web
+    final contentWidth = screenWidth > 600 ? 600.0 : screenWidth * 0.95;
+
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            /// HEADER
+            Container(
+              height: 70,
+              width: double.infinity,
+              color: const Color.fromARGB(255, 11, 49, 174),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "STUCOR - Assess & Internals",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenWidth < 400 ? 16 : 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
-      
-    
-              ] 
-                      ),
-                 )
+            ),
+
+            const SizedBox(height: 20),
+
+            /// BODY
+            Expanded(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: SizedBox(
+                    width: contentWidth,
+                    child: Column(
+                      children: [
+                        _buildCard(
+                          title: "Assessment Marks",
+                          onTap: () => Get.to(const Assesspage()),
+                        ),
+                        _buildCard(
+                          title: "Internal Marks",
+                          onTap: () => Get.to(const Assesspage()),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                 Column(children: [
-        InkWell(onTap: () {
-          Get.to(Assesspage());
-        },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                      height: 80,
-                      width: 500,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),border: Border.all(color: Colors.black)),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 180.0,top: 10),
-                            child: Text("Assessment Marks->",style: TextStyle(fontSize: 20),),
-                          ),
-                    
-                    
-                          
-                        ],
-                      ),
-                    ),
-          ),
+              ),
+            ),
+          ],
         ),
-          InkWell(onTap: () {
-          Get.to(Assesspage());
-        },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                      height: 80,
-                      width: 500,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),border: Border.all(color: Colors.black)),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 180.0,top: 10),
-                            child: Text("Internal Marks->",style: TextStyle(fontSize: 20),),
-                          ),
-                    
-            
-                          
-                        ],
-                      ),
-                    ),
-          ),
+      ),
+    );
+  }
+
+  /// REUSABLE CARD
+  Widget _buildCard({
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.black),
         ),
-      ],),
-             ]
-              ) 
-            );
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                "$title →",
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, size: 18),
+          ],
+        ),
+      ),
+    );
   }
 }
