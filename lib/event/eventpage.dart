@@ -1,3 +1,5 @@
+// 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stucorclone/event/event.dart';
@@ -7,45 +9,84 @@ class Eventpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 700 ? 700.0 : screenWidth * 0.95;
+
     return Scaffold(
-      body: InkWell(onTap: () {
-        Get.to(Event());
-      },
-        child: Container(height: 300,width: 500,
-        // color: Colors.yellow,
-          child: Row(children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 150.0,left: 50),
-              child: Container(height: 50,width: 60,
-              decoration: BoxDecoration(borderRadius:BorderRadius.all(Radius.circular(5)), color: const Color.fromARGB(255, 8, 33, 113)),
-              child: Column(children: [Text("21",style: TextStyle(color: Colors.white,fontSize: 15),),
-                      Text("AUG",style: TextStyle(color: Colors.white,fontSize: 15),)],),),
+      body: SafeArea(
+        child: Center(
+          child: InkWell(
+            onTap: () => Get.to(const Event()),
+            child: Container(
+              width: contentWidth,
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// DATE BOX
+                  Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 8, 33, 113),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("21",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14)),
+                        Text("AUG",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14)),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(width: 16),
+
+                  /// EVENT CONTENT
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// IMAGE
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.network(
+                            "https://cdn.eduprep.co/wp-content/uploads/AutoCad-Complete-Course.jpg",
+                            height: screenWidth < 400 ? 120 : 150,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                        const SizedBox(height: 8),
+
+                        /// TEXT
+                        const Text(
+                          "CREATOR'25, Arunai",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                        const Text(
+                          "Engineering College,",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        const Text(
+                          "International conference, ti...",
+                          style: TextStyle(fontSize: 14),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0),
-              child: Column(children: [
-                 Padding(
-                padding: const EdgeInsets.only(left: 30.0,),
-                child: Container(height:150,width: 300,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5))),
-                    child:Image.network("https://cdn.eduprep.co/wp-content/uploads/AutoCad-Complete-Course.jpg"), ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0,right: 45),
-                child: Text("CREATOR'25,Arunai",style: TextStyle(fontSize: 15,color: Colors.black),),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 40.0),
-                child: Text("Engineering College,",style: TextStyle(fontSize: 15,color: Colors.black),),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 18.0),
-                child: Text("international conference,ti...",style: TextStyle(fontSize: 15,color: Colors.black),),
-              )
-                       
-              ],),
-            )
-              ],),),
+          ),
+        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+// 
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,250 +10,185 @@ class Event extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 800 ? 800.0 : screenWidth * 0.95;
+
     return Scaffold(
-      
-      body: SingleChildScrollView(
-        child: Column(spacing: 20,
-          children: [
-           Padding(
-            padding: const EdgeInsets.all(10.0),
+      appBar: AppBar(title: const Text("Event Details")),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
             child: Container(
-              height: 900,
-              width: 500,
-              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(7)),
-              border: Border.all(color: Colors.black)
+              width: contentWidth,
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                border: Border.all(color: Colors.black),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
-                   Padding(
-                          padding: const EdgeInsets.only(right: 240,top: 10),
-                          child: Text("CREATOR'25 ; Arunai",style: TextStyle(fontSize: 20,color: Colors.blue),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 240.0),
-                          child: Text("Engineering college,",style: TextStyle(fontSize: 20,color: Colors.blue),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 220.0),
-                          child: Text("International   Cnfreence,",style: TextStyle(fontSize: 20,color: Colors.blue),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 280.0),
-                          child: Text("Tiruvannamalai",style: TextStyle(fontSize: 20,color: Colors.blue),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Row(spacing: 20,
-                            children: [Icon(Icons.timer),
-                          Text("From Thursday 21 August 2025 untill")],),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 250.0),
-                          child: Text("friday,22 Augusut 2025"),
-                        ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(height: 150,width: 300,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5))),
-                                        child:Image.network("https://cdn.eduprep.co/wp-content/uploads/AutoCad-Complete-Course.jpg"), ),
-                          ),
-          
+                  /// TITLE
+                  const Text(
+                    "CREATOR'25 ; Arunai Engineering College",
+                    style: TextStyle(fontSize: 20, color: Colors.blue),
+                  ),
+                  const Text(
+                    "International Conference, Tiruvannamalai",
+                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                  ),
 
-                        
-                          Padding(
-                          padding: const EdgeInsets.only(right: 40.0,top: 10,left: 10),
-                          child: Text("  AutoCAD is popuplar CAD internal short comprehension passage practice in skimming-scanning and predictin Writing- completing sentences thank you.",style: TextStyle(fontSize: 20),),
+                  const SizedBox(height: 10),
+
+                  /// DATE
+                  Row(
+                    children: const [
+                      Icon(Icons.timer),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          "From Thursday 21 August 2025 until Friday, 22 August 2025",
                         ),
-                    Column(spacing: 20,
-                      children: [  Container(
-                          
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 150.0),
-                            child: Column(
-                              children: [RichText(text: TextSpan(children:[TextSpan(text: "Course Offered By:",style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text:"  Eduprep,a STUCOR initiative.",),
-                            
-                              
-              
-                            
-                            ]
-                             )),
-                                                         
-                            
-                                    
-                              ],
-                            ),
-                          ),
-                        ),
-                         
-                            Container(
-                          
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 40.0),
-                            child: Column(
-                              children: [RichText(text: TextSpan(children:[TextSpan(text: "Contact Details",style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text:"  ContACT US:=91 9987654321,=91 98987653423",),
-                            
-                              
-              
-                            
-                            ]
-                             )),
-                                                         
-                            
-                                    
-                              ],
-                            ),
-                          ),
-                        ),],),
-                         Padding(
-                           padding: const EdgeInsets.all(20.0),
-                           child: Container(
-                            
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [Padding(
-                                  padding: const EdgeInsets.only(right: 190.0),
-                                  child: Text("-Last dates for rergistration",
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-                                ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 200.0),
-                                    child: Text("- industry recognised certificate",),
-                                  ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 220.0),
-                                      child: Text( " -28 Hours of Video Lessons",),
-                                    ),
-                              
-                            
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 257.0),
-                                  child: Text( "project &Assigment",),
-                                )
-                              
-                              ]
-                               
-                                                           
-                              
-                                      
-                                         ))),
-                         ),
-                          Padding(
-                           padding: const EdgeInsets.all(10.0),
-                           child: Container(
-                            
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [Padding(
-                                  padding: const EdgeInsets.only(right: 190.0),
-                                  child: Text("How To each Arunai eng clg, Tiruvannamalai",
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
-                                ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 200.0),
-                                    child: Text("Map: https://maps.app.goo.gl/Le6CVNa6UB2iXyMr5",),
-                                  ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 220.0),
-                                      child: Text( " Certficatets will be provide to all partcipant",),
-                                    ),
-                              
-                            
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 257.0),
-                                  child: Text( "project &Assigment",),
-                                )
-                              
-                              ]
-                               
-                                                           
-                              
-                                      
-                                         ))),
-                         ),
-                        
+                      ),
+                    ],
+                  ),
 
-              
-                       Padding(
-                         padding: const EdgeInsets.only(left: 50.0),
-                         child: Row(children: [
-                            Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(onTap: () {
-                              Get.to(Browser());
-                            
-                            },
-                              child: Container(height: 30,width: 150,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),)
-                              ,border: Border.all(color: const Color.fromARGB(255, 6, 35, 152)),
-                              ),child: Row(spacing: 5,
-                                children: [
-                                   Padding(
-                                     padding: const EdgeInsets.only(left: 30.0),
-                                     child: Icon(BootstrapIcons.globe,size: 15,color: const Color.fromARGB(255, 6, 12, 131),),
-                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text("Websites",style: TextStyle(color: const Color.fromARGB(255, 18, 10, 118)),),
-                                  ),
-                                 
-                                ],
-                              ),),
-                            ),
-                          ),
-                            Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(onTap: () {
-                              Get.to(Browser());
-                            
-                            },
-                              child: Container(height: 30,width: 150,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),)
-                              ,border: Border.all(color: const Color.fromARGB(255, 6, 35, 152)),
-                              ),child: Row(spacing: 5,
-                                children: [
-                                   Padding(
-                                     padding: const EdgeInsets.only(left: 10.0),
-                                     child: Icon(BootstrapIcons.envelope,size: 15,color: const Color.fromARGB(255, 6, 12, 131),),
-                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text("Send An email",style: TextStyle(color: const Color.fromARGB(255, 18, 10, 118)),),
-                                  ),
-                                 
-                                ],
-                              ),),
-                            ),
-                          ),
-                         
-                         
-                         ],),
-                       )
-                    
-              ],
-                            ),
-                          ),
-                        ),
+                  const SizedBox(height: 15),
 
- 
+                  /// IMAGE
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: Image.network(
+                        "https://cdn.eduprep.co/wp-content/uploads/AutoCad-Complete-Course.jpg",
+                        height: 160,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
 
-                       
-                       
-                    
+                  const SizedBox(height: 15),
 
-                       
-                        
-                                          
+                  /// DESCRIPTION
+                  const Text(
+                    "AutoCAD is a popular CAD conference focusing on industry practices, "
+                    "technical innovation and academic research collaboration.",
+                    style: TextStyle(fontSize: 16),
+                  ),
 
-                       
+                  const SizedBox(height: 15),
+
+                  /// ORGANIZER
+                  _infoRow(
+                    title: "Organised By:",
+                    value: "Eduprep, a STUCOR initiative",
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// CONTACT
+                  _infoRow(
+                    title: "Contact Details:",
+                    value: "+91 9987654321, +91 98987653423",
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  /// HIGHLIGHTS
+                  const Text(
+                    "Event Highlights",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text("• Last date for registration"),
+                  const Text("• Industry recognised certificate"),
+                  const Text("• Technical sessions & workshops"),
+                  const Text("• Projects & assignments"),
+
+                  const SizedBox(height: 20),
+
+                  /// HOW TO REACH
+                  const Text(
+                    "How to Reach Arunai Engineering College",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                      "Map: https://maps.app.goo.gl/Le6CVNa6UB2iXyMr5"),
+                  const Text(
+                      "Certificates will be provided to all participants"),
+
+                  const SizedBox(height: 25),
+
+                  /// ACTION BUTTONS
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _actionButton(
+                        icon: BootstrapIcons.globe,
+                        label: "Website",
+                      ),
+                      _actionButton(
+                        icon: BootstrapIcons.envelope,
+                        label: "Send Email",
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-     
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// INFO ROW
+  Widget _infoRow({required String title, required String value}) {
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(color: Colors.black, fontSize: 16),
+        children: [
+          TextSpan(
+            text: "$title ",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(text: value),
+        ],
+      ),
+    );
+  }
+
+  /// ACTION BUTTON
+  Widget _actionButton({required IconData icon, required String label}) {
+    return InkWell(
+      onTap: () => Get.to(const Browser()),
+      child: Container(
+        height: 35,
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border:
+              Border.all(color: const Color.fromARGB(255, 6, 35, 152)),
+        ),
+        child: Row(
+          children: [
+            Icon(icon,
+                size: 16,
+                color: const Color.fromARGB(255, 6, 12, 131)),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 18, 10, 118)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
