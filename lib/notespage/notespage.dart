@@ -1,3 +1,4 @@
+// 
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,134 +9,120 @@ class Notespage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 700 ? 700.0 : screenWidth;
+
     return Scaffold(
-      body:SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-              child:Padding(
-              padding: const EdgeInsets.only(right: 100),
-              child: Row(spacing: 30,
-                children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-                
-                Padding(
-                  padding: const EdgeInsets.only(right: .0),
-                  child: Text(" STUCOR - Notes& QP",style: TextStyle(color: Colors.white,fontSize: 20),),
-                ),
-        
-                  
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: contentWidth,
+              child: Column(
+                children: [
+                  /// HEADER
+                  Container(
+                    height: 70,
+                    width: double.infinity,
+                    color: const Color.fromARGB(255, 11, 49, 174),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Get.back(),
+                          icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            "STUCOR - Notes & QP",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: screenWidth < 400 ? 16 : 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const Divider(),
+
+                  _menuItem(
+                    icon: Icons.computer,
+                    title: "CSE",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.globe,
+                    title: "IT",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.rss,
+                    title: "ECE",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.gear_wide_connected,
+                    title: "MECH",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.building,
+                    title: "Civil",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.heart_pulse,
+                    title: "BME",
+                  ),
+                  _menuItem(
+                    icon: BootstrapIcons.pip,
+                    title: "Other UG Departments",
+                  ),
                 ],
               ),
-            ) ,),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(Icons.computer,color: Colors.blue,size: 30,),
-                Text("CSE",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 270.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
             ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.globe,color: Colors.blue,size: 30,),
-                Text("IT",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 285.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// REUSABLE LIST ITEM (RESPONSIVE)
+  Widget _menuItem({
+    required IconData icon,
+    required String title,
+  }) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () => Get.to(const Browser()),
+          child: Container(
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Icon(icon, color: Colors.blue, size: 30),
+                const SizedBox(width: 20),
+
+                /// TITLE
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ),
+
+                const Icon(
+                  Icons.arrow_circle_right_outlined,
+                  color: Colors.black,
+                  size: 28,
+                ),
+              ],
             ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.rss,color: Colors.blue,size: 30,),
-                Text("ECE",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 270.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.gear_wide_connected,color: Colors.blue,size: 30,),
-                Text("MECH",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 250.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.building,color: Colors.blue,size: 30,),
-                Text("Civil",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 260.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.heart_pulse,color: Colors.blue,size: 30,),
-                Text("BME",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 260.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Browser());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.pip,color: Colors.blue,size: 30,),
-                Text("Other UG Departments",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 140.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-        
-        
-        
-            ]),
-      ));
+          ),
+        ),
+        const Divider(),
+      ],
+    );
   }
 }
