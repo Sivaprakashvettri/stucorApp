@@ -1,3 +1,5 @@
+// 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,153 +10,134 @@ class Gpapage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 700 ? 700.0 : screenWidth * 0.95;
+
     return Scaffold(
-      body: Column(spacing: 20,
-        children: [
-         Padding(
-                          padding: const EdgeInsets.only(right: 70.0,top: 10),
-                          child: Text("GPA Calculator",style: TextStyle(fontSize:20,color:  Colors.blue),),
+      appBar: AppBar(title: const Text("GPA Calculator")),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: contentWidth,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+
+                  /// TITLE
+                  const Center(
+                    child: Text(
+                      "GPA Calculator",
+                      style: TextStyle(fontSize: 20, color: Colors.blue),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// NOTE
+                  const Text(
+                    "Note: To Listening- listening to STUCOR App's. "
+                    "Apr/May 2024 and Nov/Dec 2024 kindly refer grade sheet. "
+                    "GPA/CGPA calculator is only for reference.",
+                    style: TextStyle(color: Colors.greenAccent),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  /// FORM CARD
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: Column(
+                      children: [
+                        _title("Selected Regulation"),
+                        _dropdownBox("Choose Regulation"),
+
+                        _title("Selected Department"),
+                        _dropdownBox("Choose Department"),
+
+                        _title("Selected Semester"),
+                        _dropdownBox("Choose Semester"),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  /// DISCLAIMER
+                  const Text(
+                    "Disclaimer: This marksheet shown in STUCOR App is not final.",
+                    style: TextStyle(color: Colors.greenAccent),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  /// REPORT ISSUE
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () => Get.to(const Browser()),
+                      child: const Text(
+                        "Report an issue / bug >",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
                         ),
-                        RichText(text: TextSpan(children: [TextSpan(text:"Note:",style: TextStyle(color: Colors.greenAccent), ),
-                              TextSpan(text: " To Listening- listening to STUCOR App's .",style: TextStyle(color: Colors.greenAccent),),
-                              TextSpan(text: " apr/may 2024and nov/dec 2024",style: TextStyle(color: Colors.greenAccent),),
-                              TextSpan(text: " kindly refer grade sheet",style: TextStyle(color: Colors.greenAccent),),
-                               TextSpan(text: "GPA/CGPA Caculator college to knows your GPA.",style: TextStyle(color: Colors.greenAccent),
-                              
-                  
-                        )],),
-    ),
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(height: 300,width: 300,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),
-      border:Border.all(color: Colors.black) ),
-      child: Column(spacing: 10,
-        children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Text("Selected Regulation",style: TextStyle(color: Colors.blue),),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
+          ),
         ),
-        Container(height: 40,width: 200,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),
-        border: Border.all(color: Colors.black)),
-        child: Row(spacing: 60,
-          children: [
-          Padding(
-            padding: const EdgeInsets.only(left:10.0),
-            child: Text("choose Regulation",style: TextStyle(fontSize: 10,color: CupertinoColors.darkBackgroundGray),),
+      ),
+    );
+  }
+
+  /// SECTION TITLE
+  Widget _title(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 6),
+      child: Text(text, style: const TextStyle(color: Colors.blue)),
+    );
+  }
+
+  /// DROPDOWN STYLE BOX
+  Widget _dropdownBox(String hint) {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.black),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              hint,
+              style: const TextStyle(
+                fontSize: 12,
+                color: CupertinoColors.systemGrey,
+              ),
+            ),
           ),
-          PopupMenuButton(itemBuilder: (context)=>[PopupMenuItem(child: Row(spacing: 10,
-            children: [Text("REGULATION 2021"),
-            Text("o",style: TextStyle(fontSize: 10),)],
-          ))],)
-        ],),),
-        Text("Selected Department",style: TextStyle(color: Colors.blue),),
-        Container(height: 40,width: 200,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),
-        border: Border.all(color: Colors.black)),
-        child: Row(spacing: 45,
-          children: [
-          Padding(
-            padding: const EdgeInsets.only(left:10.0),
-            child: Text("choose Department",style: TextStyle(fontSize: 10,color: CupertinoColors.darkBackgroundGray),),
-          ),
-          PopupMenuButton(itemBuilder: (context)=>[PopupMenuItem(child: Column(
-            children: [
-              Row(spacing: 10,
-                children: [Text("CSE"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("IT"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("BME"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("ECE"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("MECH"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("AIDS"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              
-              
+          PopupMenuButton(
+            icon: const Icon(Icons.arrow_drop_down),
+            itemBuilder: (context) => const [
+              PopupMenuItem(child: Text("Option 1")),
+              PopupMenuItem(child: Text("Option 2")),
             ],
-          ))],)
-        ],),),
-        Text("Selected Semester",style: TextStyle(color: Colors.blue),),
-        Container(height: 40,width: 200,decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),),
-        border: Border.all(color: Colors.black)),
-        child: Row(spacing: 60,
-          children: [
-          Padding(
-            padding: const EdgeInsets.only(left:10.0),
-            child: Text("choose Semester",style: TextStyle(fontSize: 10,color: CupertinoColors.darkBackgroundGray),),
           ),
-          PopupMenuButton(itemBuilder: (context)=>[PopupMenuItem(child:  Column(
-            children: [
-              Row(spacing: 10,
-                children: [Text("Semester 1"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("Semester 2"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("Semester 3"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("Semester 3"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("Semester 4"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              Row(spacing: 10,
-                children: [Text("Semester 5"),
-                Text("o",style: TextStyle(fontSize: 10),),
-                ],
-              ),
-              
-              
-            ],))],)
-        ],),)
-      ],),),
-    ),
-      RichText(text: TextSpan(children: [TextSpan(text:"Disclaimers:",style: TextStyle(color: Colors.greenAccent), ),
-                              TextSpan(text: " This Listening- listening to STUCOR App's ",style: TextStyle(color: Colors.greenAccent),),
-                              TextSpan(text: " marksheet are final.",style: TextStyle(color: Colors.greenAccent),),
-                      
-    ]
-    )
-    ),
-  
-        InkWell(onTap: () {
-          Get.to(Browser());
-        },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 250.0),
-            child: Text("Report an issue/bug >"),
-          ))
-      ]));
+        ],
+      ),
+    );
   }
 }

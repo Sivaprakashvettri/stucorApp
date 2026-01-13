@@ -1,3 +1,5 @@
+// 
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,87 +10,111 @@ class Cgpapage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:Column(
-        children: [
-          Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-            child:Padding(
-            padding: const EdgeInsets.only(right: 100),
-            child: Row(spacing: 30,
-              children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-              
-              Padding(
-                padding: const EdgeInsets.only(right: .0),
-                child: Text("STUCOR -GPA/CGPA Calculator",style: TextStyle(color: Colors.white,fontSize: 20),),
-              ),
-                
-               
-                
-              ],
-            ),
-          ) ,),
+    final screenWidth = MediaQuery.of(context).size.width;
+    final contentWidth = screenWidth > 700 ? 700.0 : screenWidth;
 
-          InkWell(onTap: () {
-            Get.to(Gpapage());
-                      },
-            child: Container(height: 100,width: 500,
-            // color: Colors.green,
-            child: Row(spacing: 90,
-              children: [
-              Container(height: 100,width: 70,
-              // color: Colors.white,
-              child: Icon(Icons.calculate,color: Colors.blue,size: 30,),),
-              Container(height: 100,width: 200,
-              // color: Colors.pink,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 40,top: 40),
-                child: Text("GPA Calculator",style: TextStyle(color: Colors.black,fontSize: 17),),
-              ),),
-              Container(height: 100,width: 30,
-              // color: Colors.yellow,
-              child: Icon(Icons.arrow_circle_right,color: Colors.black,size: 30,),)
-            ],),),
-          ),Divider(),
-          InkWell(onTap: () {
-                      },
-            child: Container(height: 100,width: 500,
-            // color: Colors.green,
-            child: Row(spacing: 90,
-              children: [
-              Container(height: 100,width: 70,
-              // color: Colors.white,
-              child: Icon(BootstrapIcons.calculator_fill,color: Colors.blue,size: 30,),),
-              Container(height: 100,width: 200,
-              // color: Colors.pink,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40.0,right: 5),
-                child: Text("CGPA Calculator",style: TextStyle(color: Colors.black,fontSize: 17),),
-              ),),
-              Container(height: 100,width: 30,
-              // color: Colors.yellow,
-              child: Icon(Icons.arrow_circle_right,color: Colors.black,size: 30,),)
-            ],),),
-          ),Divider(),
-          InkWell(onTap: () {
-                      },
-            child: Container(height: 80,width: 500,
-            // color: Colors.green,
-            child: Row(spacing: 90,
-              children: [
-              Container(height: 100,width: 70,
-              // color: Colors.white,
-              child: Icon(BootstrapIcons.calendar2_plus_fill,color: Colors.blue,size: 30,),),
-              Container(height: 100,width: 200,
-              // color: Colors.pink,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: Text("Percentage Calculator",style: TextStyle(color: Colors.black,fontSize: 17),),
-              ),),
-              Container(height: 100,width: 30,
-              // color: Colors.yellow,
-              child: Icon(Icons.arrow_circle_right,color: Colors.black,size: 30,),)
-            ],),),
-          ),Divider()
-    ]));
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            /// HEADER
+            Container(
+              height: 70,
+              width: double.infinity,
+              color: const Color.fromARGB(255, 11, 49, 174),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "STUCOR - GPA / CGPA Calculator",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenWidth < 400 ? 16 : 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            /// BODY
+            Expanded(
+              child: Center(
+                child: SizedBox(
+                  width: contentWidth,
+                  child: Column(
+                    children: [
+                      _menuTile(
+                        icon: Icons.calculate,
+                        title: "GPA Calculator",
+                        onTap: () => Get.to(const Gpapage()),
+                      ),
+                      const Divider(),
+
+                      _menuTile(
+                        icon: BootstrapIcons.calculator_fill,
+                        title: "CGPA Calculator",
+                        onTap: () {},
+                      ),
+                      const Divider(),
+
+                      _menuTile(
+                        icon: BootstrapIcons.calendar2_plus_fill,
+                        title: "Percentage Calculator",
+                        onTap: () {},
+                      ),
+                      const Divider(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// REUSABLE MENU TILE
+  Widget _menuTile({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        height: 80,
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.blue, size: 30),
+            const SizedBox(width: 20),
+
+            /// TITLE
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(fontSize: 17),
+              ),
+            ),
+
+            const Icon(
+              Icons.arrow_circle_right,
+              color: Colors.black,
+              size: 28,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
