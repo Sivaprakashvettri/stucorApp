@@ -1,8 +1,9 @@
+// 
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stucorclone/more/listmore.dart';
-import 'package:stucorclone/widget/browser.dart';
 
 class Morepage extends StatelessWidget {
   const Morepage({super.key});
@@ -10,64 +11,95 @@ class Morepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-              child:Padding(
-              padding: const EdgeInsets.only(right: 100),
-              child: Row(spacing: 30,
-                children: [
-                
-                Padding(
-                  padding: const EdgeInsets.only(right: .0),
-                  child: Text(" STUCOR ",style: TextStyle(color: Colors.white,fontSize: 20),),
-                ),]),))
-        
-         ,InkWell(onTap: () {
-              Get.to(Listmore());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.globe,color: Colors.blue,size: 30,),
-                Text("Menu",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 270.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Listmore());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.messenger,color: Colors.blue,size: 30,),
-                Text("Contact Us",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 230.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
-            Divider(),
-            InkWell(onTap: () {
-              Get.to(Listmore());
-            },
-              child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                children: [
-                Icon(BootstrapIcons.pip,color: Colors.blue,size: 30,),
-                Text("Terms/privacy/disclaimer",style: TextStyle(fontSize: 15),),
-                Padding(
-                  padding: const EdgeInsets.only(left: 130.0),
-                  child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                )
-              
-              ],),),
-            ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double maxWidth = constraints.maxWidth;
+          double contentWidth =
+              maxWidth > 600 ? 600 : maxWidth * 0.95;
 
-      ]),
+          return Column(
+            children: [
+
+              /// 🔹 Header
+              Container(
+                height: 80,
+                width: double.infinity,
+                color: const Color.fromARGB(255, 11, 49, 174),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: const Row(
+                  children: [
+                    Text(
+                      "STUCOR",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+
+              /// 🔹 Menu Items
+              _menuItem(
+                width: contentWidth,
+                icon: BootstrapIcons.globe,
+                title: "Menu",
+                onTap: () => Get.to(Listmore()),
+              ),
+
+              const Divider(),
+
+              _menuItem(
+                width: contentWidth,
+                icon: BootstrapIcons.messenger,
+                title: "Contact Us",
+                onTap: () => Get.to(Listmore()),
+              ),
+
+              const Divider(),
+
+              _menuItem(
+                width: contentWidth,
+                icon: BootstrapIcons.pip,
+                title: "Terms / Privacy / Disclaimer",
+                onTap: () => Get.to(Listmore()),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  /// 🔹 Reusable Menu Tile
+  Widget _menuItem({
+    required double width,
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        height: 80,
+        width: width,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.blue, size: 30),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 15),
+                ),
+              ),
+              const Icon(
+                Icons.arrow_circle_right_outlined,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

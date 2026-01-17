@@ -1,3 +1,5 @@
+// 
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,126 +17,118 @@ class Listmore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [InkWell(onTap: () {
-                Get.to(Newspage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(Icons.newspaper,color: Colors.blue,size: 30,),
-                  Text("news",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 270.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double maxWidth = constraints.maxWidth;
+          double contentWidth =
+              maxWidth > 600 ? 600 : maxWidth * 0.95;
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: Icons.newspaper,
+                  title: "News",
+                  onTap: () => Get.to(Newspage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.journal_check,
+                  title: "Result",
+                  onTap: () => Get.to(Resultpage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.journal_medical,
+                  title: "Internals",
+                  onTap: () => Get.to(Internalpage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.calculator,
+                  title: "GPA / CGPA",
+                  onTap: () => Get.to(Browser()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: Icons.note,
+                  title: "Notes / QP",
+                  onTap: () => Get.to(Notespage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.person_video3,
+                  title: "Online Course",
+                  onTap: () => Get.to(Coursepage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.calendar,
+                  title: "Event",
+                  onTap: () => Get.to(Eventpage()),
+                ),
+                const Divider(),
+
+                _menuItem(
+                  width: contentWidth,
+                  icon: BootstrapIcons.calendar_event_fill,
+                  title: "TimeTable",
+                  onTap: () => Get.to(Browser()),
+                ),
+                const Divider(),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  /// 🔹 Reusable Menu Tile (Responsive)
+  Widget _menuItem({
+    required double width,
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        height: 80,
+        width: width,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              Icon(icon, color: Colors.blue, size: 30),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 15),
+                ),
               ),
-              Divider(),
-              InkWell(onTap: () {
-                Get.to(Resultpage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(BootstrapIcons.journal_check,color: Colors.blue,size: 30,),
-                  Text("Result",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 260.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
+              const Icon(
+                Icons.arrow_circle_right_outlined,
+                color: Colors.black,
               ),
-              Divider(),
-              InkWell(onTap: () {
-                Get.to(Internalpage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon( BootstrapIcons.journal_medical,color: Colors.blue,size: 30,),
-                  Text("internals",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 240.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-              InkWell(onTap: () {
-                Get.to(Browser());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(BootstrapIcons.calculator,color: Colors.blue,size: 30,),
-                  Text("GPA/CGPA...",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 210.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-              Divider(),
-              InkWell(onTap: () {
-                Get.to(Notespage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon( Icons.note,color: Colors.blue,size: 30,),
-                  Text("Notes/QP",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 230.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-              Divider(),
-              InkWell(onTap: () {
-                Get.to(Coursepage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(BootstrapIcons.person_video3,color: Colors.blue,size: 30,),
-                  Text("Online Course",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 200.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-        InkWell(onTap: () {
-                Get.to(Eventpage());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(BootstrapIcons.calendar,color: Colors.blue,size: 30,),
-                  Text("Event",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 260.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-              Divider(),
-              InkWell(onTap: () {
-                Get.to(Browser());
-              },
-                child: Container(height: 80,width: 450,child: Row(spacing: 30,
-                  children: [
-                  Icon(BootstrapIcons.calendar_event_fill,color: Colors.blue,size: 30,),
-                  Text("TmeTable",style: TextStyle(fontSize: 15),),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 225.0),
-                    child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,color: Colors.black,)),
-                  )
-                
-                ],),),
-              ),
-              
-        ],),
+            ],
+          ),
+        ),
       ),
     );
   }
