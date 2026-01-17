@@ -1,8 +1,8 @@
+// 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stucorclone/studyabroad/abroadform.dart';
-import 'package:stucorclone/widget/browser.dart';
 
 class Abroadpage extends StatelessWidget {
   const Abroadpage({super.key});
@@ -10,59 +10,103 @@ class Abroadpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Column(spacing: 20,
-        children: [
-          Container(height: 80,width: 500,color: const Color.fromARGB(255, 11, 49, 174),
-            child:Padding(
-            padding: const EdgeInsets.only(right: 100),
-            child: Row(spacing: 30,
-              children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-              
-              Padding(
-                padding: const EdgeInsets.only(right: .0),
-                child: Text("STUCOR - STUDY ABROAD",style: TextStyle(color: Colors.white,fontSize: 20),),
-              ),
-                
-               
-                
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double maxWidth = constraints.maxWidth;
+          double contentWidth =
+              maxWidth > 600 ? 600 : maxWidth * 0.95;
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+
+                /// 🔹 App Bar
+                Container(
+                  height: 80,
+                  width: double.infinity,
+                  color: const Color.fromARGB(255, 11, 49, 174),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: const Icon(Icons.arrow_back,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(width: 20),
+                      const Text(
+                        "STUCOR - STUDY ABROAD",
+                        style:
+                            TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// 🔹 Main Card
+                SizedBox(
+                  width: contentWidth,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: Column(
+                      children: [
+
+                        const SizedBox(height: 10),
+
+                        const Text(
+                          "Study Abroad",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue),
+                        ),
+
+                        const SizedBox(height: 15),
+
+                        /// 🔹 Description
+                        RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                            children: [
+                              const TextSpan(
+                                  text:
+                                      "Feature coming soon! We’re excited to bring a complete study abroad experience. "),
+                              const TextSpan(
+                                  text:
+                                      "Stay updated to know when it launches. "),
+                              TextSpan(
+                                text: "Click here",
+                                style:
+                                    const TextStyle(color: Colors.blue),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Get.to(Abroadform());
+                                  },
+                              ),
+                              const TextSpan(
+                                  text:
+                                      " to join the waitlist and be notified as soon as it’s live!"),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
-          ) ,),
-            Container(height: 250,width: 450,
-            decoration: BoxDecoration(borderRadius:BorderRadius.all(Radius.circular(10)) ,border: Border.all(color: Colors.black)),
-              child: Container(
-                            
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text("Study Abroad",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),),
-                                ),
-                                  RichText(text: TextSpan(children:[TextSpan(text:"  Feature Coming Soon : We're Xicted TO bringd completing  ",style: TextStyle(fontSize: 15),),
-                                  TextSpan(text:"kindly download  timetable provide below and prepare for the examinaation accordingly" ,style: TextStyle(fontSize: 15),),
-                                  TextSpan(text:"plus ,a tool stay update to know when it launches." ,style: TextStyle(fontSize: 15),),
-                              
-                                TextSpan(text: "click here",style: TextStyle(color: Colors.blue,fontSize: 15),
-                                recognizer: TapGestureRecognizer()..onTap=(){
-                                  Get.to(Abroadform());
-                              
-                                }),
-                                TextSpan(text: " to join the waitlist and be notified as soon as it's liive !",style: TextStyle(fontSize: 15),)
-                              
-                              ]
-                               )),
-                                                           
-                              
-                                      
-                                ],
-                              ),
-                            ),
-                          ),
-            ),
-                        
-
-      
-    ]));
+          );
+        },
+      ),
+    );
   }
 }
