@@ -1,3 +1,5 @@
+// 
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,153 +24,136 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color.fromARGB(255, 9, 32, 144),
-        title: Text("STUCOR",style: TextStyle(color: Colors.white,fontSize: 20),),
-      actions: [IconButton(onPressed: (){
-        Get.to(Newspage());
-      }, icon: Icon(BootstrapIcons.bell,color: Colors.white,),)],
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 9, 32, 144),
+        title: const Text("STUCOR",
+            style: TextStyle(color: Colors.white, fontSize: 20)),
+        actions: [
+          IconButton(
+            onPressed: () => Get.to(Newspage()),
+            icon: const Icon(BootstrapIcons.bell, color: Colors.white),
+          )
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(spacing: 20,
-          children: [ 
-                  Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("Trusted by 20 Lakh+ Students",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          ),
-        
-          Row(spacing: 20,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            InkWell(
-              onTap: () {
-                Get.to(Newspage());
-              },
-              child: Mainwidget(icon: Icons.newspaper, text: "News", size: 40, color: Colors.blueAccent)),
-             InkWell(
-              onTap: () {
-                Get.to(Resultpage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.journal_check, text: "Results", size: 40, color: Colors.blueAccent)),
-           InkWell(
-              onTap: () {
-                Get.to(Internalpage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.journal_medical, text: "Internals", size: 40, color: Colors.blueAccent)),
-           
-            
-             ],),
-             Row(spacing: 20,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            InkWell(
-              onTap: () {
-                Get.to(Cgpapage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.calculator, text: "GPA/CGPA C...", size: 40, color: Colors.blueAccent)),
-             InkWell(
-              onTap: () {
-                Get.to(Notespage());
-              },
-              child: Mainwidget(icon: Icons.note, text: "Notes/QP", size: 40, color: Colors.blueAccent)),
-           InkWell(
-              onTap: () {
-                Get.to(Coursepage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.person_video3, text: "Online Course", size: 40, color: Colors.blueAccent)),
-           
-            
-             ],),
 
-             Container(
-height: 40,
-width: 470,
-decoration: BoxDecoration(
-  color: const Color.fromARGB(255, 238, 211, 176),
-  borderRadius: BorderRadius.all(Radius.circular(5))
-),
-child: Padding(
-  padding: const EdgeInsets.only(top:8.0,left: 95),
-  child: Text("Used by 20k+ faculty | 20 lakh+ Students",style: TextStyle(
-    color: Colors.black,fontSize: 15
-  ),),
-),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          int crossAxisCount = constraints.maxWidth > 900
+              ? 4
+              : constraints.maxWidth > 600
+                  ? 3
+                  : 2;
 
-             ),
-             Row(spacing: 20,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            InkWell(
-              onTap: () {
-                Get.to(Eventpage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.calendar, text: "Event", size: 40, color: Colors.blueAccent)),
-             InkWell(
-              onTap: () {
-                Get.to(Timepage());
-              },
-              child: Mainwidget(icon:BootstrapIcons.calendar_event_fill, text: "Timetable", size: 40, color: Colors.blueAccent)),
-           InkWell(
-              onTap: () {
-                Get.to(Syllabuspage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.journal_text, text: "Syllabus", size: 40, color: Colors.blueAccent)),
-           
-            
-             ],),
-             Row(spacing: 20,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            InkWell(
-              onTap: () {
-                Get.to(Schedulepage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.journal_album, text: "Schedule", size: 40, color: Colors.blueAccent)),
-             InkWell(
-              onTap: () {
-                Get.to(Rankpage());
-              },
-              child: Mainwidget(icon:BootstrapIcons.award_fill, text: "Rank/Medalist", size: 40, color: Colors.blueAccent)),
-           InkWell(
-              onTap: () {
-                Get.to(Abroadpage());
-              },
-              child: Mainwidget(icon: BootstrapIcons.geo_alt_fill, text: "Study Abroad", size: 40, color: Colors.blueAccent)),
-           
-            
-             ],),
-          
-          ],
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+
+                const SizedBox(height: 20),
+
+                const Text(
+                  "Trusted by 20 Lakh+ Students",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// 🔹 Responsive Grid
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GridView.count(
+                    crossAxisCount: crossAxisCount,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    children: [
+
+                      _item(Icons.newspaper, "News", () => Get.to(Newspage())),
+                      _item(BootstrapIcons.journal_check, "Results",
+                          () => Get.to(Resultpage())),
+                      _item(BootstrapIcons.journal_medical, "Internals",
+                          () => Get.to(Internalpage())),
+                      _item(BootstrapIcons.calculator, "GPA/CGPA",
+                          () => Get.to(Cgpapage())),
+                      _item(Icons.note, "Notes/QP",
+                          () => Get.to(Notespage())),
+                      _item(BootstrapIcons.person_video3, "Online Course",
+                          () => Get.to(Coursepage())),
+                      _item(BootstrapIcons.calendar, "Event",
+                          () => Get.to(Eventpage())),
+                      _item(BootstrapIcons.calendar_event_fill, "Timetable",
+                          () => Get.to(Timepage())),
+                      _item(BootstrapIcons.journal_text, "Syllabus",
+                          () => Get.to(Syllabuspage())),
+                      _item(BootstrapIcons.journal_album, "Schedule",
+                          () => Get.to(Schedulepage())),
+                      _item(BootstrapIcons.award_fill, "Rank/Medalist",
+                          () => Get.to(Rankpage())),
+                      _item(BootstrapIcons.geo_alt_fill, "Study Abroad",
+                          () => Get.to(Abroadpage())),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// 🔹 Info Banner
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 238, 211, 176),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    "Used by 20k+ faculty | 20 lakh+ Students",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+              ],
             ),
-      ),bottomNavigationBar: 
-      ClipRRect(
-        borderRadius: BorderRadiusGeometry.all(Radius.circular(50)),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Container(padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30),)),
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-             unselectedItemColor: Colors.black,unselectedLabelStyle: TextStyle(color: Colors.black),
-              items:  [BottomNavigationBarItem(icon: Icon(BootstrapIcons.globe,color: Colors.blue,),label: "Home"),
-            BottomNavigationBarItem(icon: InkWell(onTap: () {
-              Get.to(Resultpage());
-            },
-              child: Icon(BootstrapIcons.journal_check,color: Colors.black,)),label: "Results"),
-            BottomNavigationBarItem(icon: InkWell(onTap: () {
-              Get.to(Notespage());
-            },
-              child: Icon(Icons.note,color: Colors.black,)),label: "Notes/QP"),
-            BottomNavigationBarItem(icon: InkWell(onTap: () {
-              Get.to(Morepage());
-            },
-              child: Icon(Icons.more_rounded,color: Colors.black,)),label: "More")]),
-          ),
-        ),
+          );
+        },
       ),
-        
-         
-        );
-    
-  
+
+      /// 🔹 Bottom Navigation
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: [
+          const BottomNavigationBarItem(
+              icon: Icon(BootstrapIcons.globe), label: "Home"),
+          BottomNavigationBarItem(
+              icon: InkWell(
+                  onTap: () => Get.to(Resultpage()),
+                  child: const Icon(BootstrapIcons.journal_check)),
+              label: "Results"),
+          BottomNavigationBarItem(
+              icon: InkWell(
+                  onTap: () => Get.to(Notespage()),
+                  child: const Icon(Icons.note)),
+              label: "Notes/QP"),
+          BottomNavigationBarItem(
+              icon: InkWell(
+                  onTap: () => Get.to(Morepage()),
+                  child: const Icon(Icons.more_rounded)),
+              label: "More"),
+        ],
+      ),
+    );
+  }
+
+  Widget _item(IconData icon, String text, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Mainwidget(
+        icon: icon,
+        text: text,
+        size: 40,
+        color: Colors.blueAccent,
+      ),
+    );
   }
 }
